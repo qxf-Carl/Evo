@@ -20,3 +20,10 @@ README
 - **Quality Assurance:** Discuss the methods and experience of unit testing, integration testing, stand-alone stress testing, and full-link stress testing to improve service performance and stability and ensure safe production.
 - **DevOps:** Integrated development and operation and maintenance, laying a solid foundation for the realization of CI/CD.
 
+### Stages
+
+- [Stage0 - Java EE standard architecture](https://github.com/qxf-Carl/Evo/stage-0/Stage0.md)
+- Stage1 - Java open source hybrid architecture
+- Stage2 - SOA architecture
+- Stage3 - Microservice architecture
+- Stage4 - Cloud native architecture

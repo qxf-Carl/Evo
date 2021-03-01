@@ -5,14 +5,17 @@ import org.geektimes.projects.user.domain.User;
 import java.beans.BeanInfo;
 import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
-import java.io.PrintWriter;
 import java.lang.reflect.Method;
 import java.sql.*;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Properties;
+import java.util.logging.Logger;
 
 public class DBConnectionManager {
+
+    private static Logger logger = Logger.getLogger(DBConnectionManager.class.getName());
+
+    private static final String DATABASE_URL = "jdbc:derby:/db/user-platform;create=true";
 
     private Connection connection;
 
@@ -20,8 +23,8 @@ public class DBConnectionManager {
         this.connection = connection;
     }
 
-    public Connection getConnection() {
-        return this.connection;
+    public Connection getConnection() throws SQLException {
+        return DriverManager.getConnection(DATABASE_URL);
     }
 
     public void releaseConnection() {
