@@ -10,7 +10,8 @@
 
 - [x] 通过 Controller -> Service -> Repository 实现（数据库实现）
 
-  [入口-UserRegisterController](https://github.com/qxf-Carl/Evo/stage-0/user-platform/user-web/src/main/java/org/geektimes/projects/user/web/controller/UserRegisterController.java)
+  [入口-UserRegisterController](https://github.com/qxf-Carl/Evo/blob/main/stage-0/user-platform/user-web/src/main/java/org/geektimes/projects/user/web/controller/UserRegisterController.java)
+  
 
 - [ ] （非必须）JNDI 的方式获取数据库源（DataSource），在获取 Connection
 

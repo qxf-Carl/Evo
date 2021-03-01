@@ -14,7 +14,7 @@ README
 - **Technology System:** Overview of the features and usage scenarios of Java SE, Java EE and popular Java open source frameworks, including Netty, Dubbo, Spring, Spring Boot, Spring Cloud, Kubernetes, Docker, distributed system design, high concurrency, high availability, gRPC, Distributed cache, big data storage, message queue, sub-database sub-table, database tuning, etc.
 - **Architecture evolution:** Discuss the details and development of traditional Java EE, SOA, microservices, Reactive and Cloud-Native architecture.
 
-![img](.\resource\project-1.62bfa416.png)
+![img](https://github.com/qxf-Carl/Evo/blob/main/resource/project-1.62bfa416.png)
 
 - **Project process:** Discuss the process, tools, division of labor and collaboration of various stages of Internet projects from project establishment to launch.
 - **Quality Assurance:** Discuss the methods and experience of unit testing, integration testing, stand-alone stress testing, and full-link stress testing to improve service performance and stability and ensure safe production.
@@ -22,7 +22,7 @@ README
 
 ### Stages
 
-- [Stage0 - Java EE standard architecture](https://github.com/qxf-Carl/Evo/stage-0/Stage0.md)
+- [Stage0 - Java EE standard architecture](https://github.com/qxf-Carl/Evo/blob/main/stage-0/Stage0.md)
 - Stage1 - Java open source hybrid architecture
 - Stage2 - SOA architecture
 - Stage3 - Microservice architecture
