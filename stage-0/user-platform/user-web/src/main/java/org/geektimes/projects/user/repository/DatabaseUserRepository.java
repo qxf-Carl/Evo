@@ -1,7 +1,7 @@
 package org.geektimes.projects.user.repository;
 
-import org.apache.commons.lang.StringUtils;
 import org.geektimes.function.ThrowableFunction;
+import org.geektimes.context.ComponentContext;
 import org.geektimes.projects.user.domain.User;
 import org.geektimes.projects.user.sql.DBConnectionManager;
 
@@ -24,7 +24,7 @@ public class DatabaseUserRepository implements UserRepository {
     /**
      * 通用处理方式
      */
-    private static final Consumer<Throwable> COMMON_EXCEPTION_HANDLER = e -> logger.log(Level.SEVERE, e.getMessage());
+    private static Consumer<Throwable> COMMON_EXCEPTION_HANDLER = e -> logger.log(Level.SEVERE, e.getMessage());
 
     public static final String INSERT_USER_DML_SQL =
             "INSERT INTO users(name,password,email,phoneNumber) VALUES " +
@@ -34,17 +34,17 @@ public class DatabaseUserRepository implements UserRepository {
 
     private final DBConnectionManager dbConnectionManager;
 
-    public DatabaseUserRepository(DBConnectionManager dbConnectionManager) {
-        this.dbConnectionManager = dbConnectionManager;
+    public DatabaseUserRepository() {
+        this.dbConnectionManager = ComponentContext.getInstance().getComponent("bean/DBConnectionManager");
     }
 
-    private Connection getConnection() throws SQLException {
+    private Connection getConnection() {
         return dbConnectionManager.getConnection();
     }
 
     @Override
     public boolean save(User user) {
-        return this.executeUpdate(INSERT_USER_DML_SQL, COMMON_EXCEPTION_HANDLER, user);
+        return false;
     }
 
     @Override
@@ -110,8 +110,8 @@ public class DatabaseUserRepository implements UserRepository {
      */
     protected <T> T executeQuery(String sql, ThrowableFunction<ResultSet, T> function,
                                  Consumer<Throwable> exceptionHandler, Object... args) {
+        Connection connection = getConnection();
         try {
-            Connection connection = getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             for (int i = 0; i < args.length; i++) {
                 Object arg = args[i];
@@ -138,30 +138,6 @@ public class DatabaseUserRepository implements UserRepository {
         return null;
     }
 
-    protected boolean executeUpdate(String sql,
-                                    Consumer<Throwable> exceptionHandler,
-                                    User user) {
-        try {
-            Connection connection = getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            preparedStatement.setString(1, user.getName());
-            preparedStatement.setString(2, user.getPassword());
-            if (StringUtils.isEmpty(user.getEmail())) {
-                preparedStatement.setString(3,"");
-            }
-            if (StringUtils.isEmpty(user.getPhoneNumber())) {
-                preparedStatement.setString(4, "");
-            }
-            int row = preparedStatement.executeUpdate();
-            return row > 0;
-//            int rows = preparedStatement.executeUpdate(INSERT_USER_DML_SQL, Statement.RETURN_GENERATED_KEYS);
-        } catch (Throwable e) {
-            exceptionHandler.accept(e);
-        } finally {
-            dbConnectionManager.releaseConnection();
-        }
-        return false;
-    }
 
     private static String mapColumnLabel(String fieldName) {
         return fieldName;
